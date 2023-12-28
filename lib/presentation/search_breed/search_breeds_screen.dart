@@ -1,46 +1,28 @@
 import 'package:doggo_pedia/presentation/breed/cubit/breed_cubit.dart';
 import 'package:doggo_pedia/presentation/breed/cubit/breed_state.dart';
 import 'package:doggo_pedia/presentation/detail_breed/detail_breed_screen.dart';
-import 'package:doggo_pedia/presentation/manager/routes_manager.dart';
-import 'package:doggo_pedia/presentation/search_breed/search_breeds_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:gap/gap.dart';
 
-class BreedComponent extends StatefulWidget {
-  const BreedComponent({super.key});
+class SearchBreedScreen extends StatefulWidget {
+  const SearchBreedScreen({super.key});
 
   @override
-  State<BreedComponent> createState() => _BreedComponentState();
+  State<SearchBreedScreen> createState() => _SearchBreedScreenState();
 }
 
-class _BreedComponentState extends State<BreedComponent> {
-  @override
-  void initState() {
-    context.read<BreedCubit>().getBreed();
-    super.initState();
-  }
-
+class _SearchBreedScreenState extends State<SearchBreedScreen> {
+  final search = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return BlocBuilder<BreedCubit, BreedState>(
       builder: (context, state) {
         return Scaffold(
           appBar: AppBar(
-            title: Text('List'),
-            elevation: 0,
-            actions: [
-              IconButton(
-                onPressed: () => Navigator.of(context).push(
-                  MaterialPageRoute(
-                    builder: (_) => SearchBreedScreen(),
-                  ),
-                ),
-                icon: Icon(
-                  Icons.search,
-                ),
-              )
-            ],
+            title: SearchBar(
+              search: search,
+            ),
           ),
           body: Center(
             child: state.isLoading
@@ -72,9 +54,9 @@ class _BreedComponentState extends State<BreedComponent> {
         crossAxisSpacing: 20,
         mainAxisSpacing: 20,
       ),
-      itemCount: state.breed.length,
+      itemCount: state.searchResults.length,
       itemBuilder: (context, index) {
-        final breed = state.breed[index];
+        final breed = state.searchResults[index];
         return GestureDetector(
           onTap: () {
             Navigator.push(
@@ -138,6 +120,46 @@ class _BreedComponentState extends State<BreedComponent> {
           ),
         );
       },
+    );
+  }
+}
+
+class SearchBar extends StatelessWidget {
+  const SearchBar({
+    super.key,
+    required this.search,
+  });
+
+  final TextEditingController search;
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: double.infinity,
+      height: 40,
+      decoration: BoxDecoration(
+        color: Colors.white,
+        borderRadius: BorderRadius.circular(5),
+      ),
+      child: Center(
+        child: TextField(
+          onChanged: (query) {
+            context.read<BreedCubit>().searchBreedByName(query);
+          },
+          controller: search,
+          decoration: InputDecoration(
+            prefixIcon: Icon(Icons.search),
+            suffixIcon: IconButton(
+              onPressed: () {
+                search.clear();
+              },
+              icon: Icon(Icons.clear),
+            ),
+            hintText: 'Search...',
+            border: InputBorder.none,
+          ),
+        ),
+      ),
     );
   }
 }

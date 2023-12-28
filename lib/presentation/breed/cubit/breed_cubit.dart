@@ -45,4 +45,18 @@ class BreedCubit extends Cubit<BreedState> {
       },
     );
   }
+
+  void searchBreedByName(String query) {
+    if (query.isEmpty) {
+      emit(state.copyWith(searchResults: state.breed));
+      return;
+    }
+    //
+    final List<Breed> results = state.breed
+        .where(
+            (breed) => breed.name.toLowerCase().contains(query.toLowerCase()))
+        .toList();
+
+    emit(state.copyWith(searchResults: results));
+  }
 }
