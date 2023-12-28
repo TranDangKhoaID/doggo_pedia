@@ -1,6 +1,7 @@
 import 'package:doggo_pedia/presentation/breed/breed_screen.dart';
 import 'package:doggo_pedia/presentation/breed/cubit/breed_cubit.dart';
 import 'package:doggo_pedia/presentation/home/home_screen.dart';
+import 'package:doggo_pedia/presentation/manager/routes_manager.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 
@@ -9,7 +10,15 @@ class App extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const AppScreen();
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider(
+          create: (context) => BreedCubit(),
+          lazy: false,
+        ),
+      ],
+      child: const AppScreen(),
+    );
   }
 }
 
@@ -25,6 +34,7 @@ class _AppScreenState extends State<AppScreen> {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Doggo Pedia',
+      routes: RouteGenerator.routes,
       debugShowCheckedModeBanner: false,
       home: BreedScreen(),
     );

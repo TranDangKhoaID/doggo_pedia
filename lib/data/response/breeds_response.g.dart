@@ -12,12 +12,12 @@ BreedsDataResponse _$BreedsDataResponseFromJson(Map<String, dynamic> json) =>
       height: Dimension.fromJson(json['height'] as Map<String, dynamic>),
       id: json['id'] as int,
       name: json['name'] as String,
-      bredFor: json['bredFor'] as String?,
-      breedGroup: json['breedGroup'] as String?,
-      lifeSpan: json['lifeSpan'] as String?,
+      bred_for: json['bred_for'] as String?,
+      breed_group: json['breed_group'] as String?,
+      life_span: json['life_span'] as String?,
       temperament: json['temperament'] as String?,
       origin: json['origin'] as String?,
-      referenceImageId: json['referenceImageId'] as String?,
+      reference_image_id: json['reference_image_id'] as String?,
     );
 
 Map<String, dynamic> _$BreedsDataResponseToJson(BreedsDataResponse instance) =>
@@ -26,10 +26,10 @@ Map<String, dynamic> _$BreedsDataResponseToJson(BreedsDataResponse instance) =>
       'height': instance.height,
       'id': instance.id,
       'name': instance.name,
-      'bredFor': instance.bredFor,
-      'breedGroup': instance.breedGroup,
-      'lifeSpan': instance.lifeSpan,
+      'bred_for': instance.bred_for,
+      'breed_group': instance.breed_group,
+      'life_span': instance.life_span,
       'temperament': instance.temperament,
       'origin': instance.origin,
-      'referenceImageId': instance.referenceImageId,
+      'reference_image_id': instance.reference_image_id,
     };

@@ -13,9 +13,6 @@ class BreedScreen extends StatefulWidget {
 class _BreedScreenState extends State<BreedScreen> {
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) => BreedCubit(),
-      child: const BreedComponent(),
-    );
+    return const BreedComponent();
   }
 }

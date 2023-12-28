@@ -19,24 +19,24 @@ class BreedsDataResponse {
   final Dimension height;
   final int id;
   final String name;
-  final String? bredFor;
-  final String? breedGroup;
-  final String? lifeSpan;
+  final String? bred_for;
+  final String? breed_group;
+  final String? life_span;
   final String? temperament;
   final String? origin;
-  final String? referenceImageId;
+  final String? reference_image_id;
 
   BreedsDataResponse({
     required this.weight,
     required this.height,
     required this.id,
     required this.name,
-    this.bredFor,
-    this.breedGroup,
-    this.lifeSpan,
+    this.bred_for,
+    this.breed_group,
+    this.life_span,
     this.temperament,
     this.origin,
-    this.referenceImageId,
+    this.reference_image_id,
   });
 
   factory BreedsDataResponse.fromJson(Map<String, dynamic> json) =>
@@ -52,30 +52,12 @@ extension BreedsResponseMapper on BreedsDataResponse {
       height: height,
       id: id,
       name: name,
-      bredFor: bredFor,
-      breedGroup: breedGroup,
-      lifeSpan: lifeSpan,
+      bredFor: bred_for,
+      breedGroup: breed_group,
+      lifeSpan: life_span,
       temperament: temperament,
       origin: origin,
-      referenceImageId: referenceImageId,
+      referenceImageId: reference_image_id,
     );
   }
-  // List<Breed> toDomain() {
-  //   return (breeds ?? [])
-  //       .map(
-  //         (item) => Breed(
-  //           weight: item.weight,
-  //           height: item.height,
-  //           id: item.id,
-  //           name: item.name,
-  //           bredFor: item.bredFor,
-  //           breedGroup: item.breedGroup,
-  //           lifeSpan: item.lifeSpan,
-  //           temperament: item.temperament,
-  //           origin: item.origin,
-  //           referenceImageId: item.referenceImageId,
-  //         ),
-  //       )
-  //       .toList();
-  // }
 }
